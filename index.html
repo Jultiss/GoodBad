@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix aléatoire pour enfants</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        #punitionButton, #bonneActionButton {
+            padding: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+        }
+        #bonneActionButton {
+            background-color: #4CAF50;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Choix aléatoire pour enfants</h1>
+    <button id="punitionButton" onclick="choisirPunition()">Punition</button>
+    <button id="bonneActionButton" onclick="choisirBonneAction()">Bonne action</button>
+    <p id="resultat">Cliquez sur un bouton pour choisir une punition ou une bonne action</p>
+    <p id="description"></p>
+
+    <script>
+        let punitions = [];
+        let bonnesActions = [];
+
+        // Charger les punitions depuis le fichier JSON
+        fetch('punitions.json')
+            .then(response => response.json())
+            .then(data => {
+                punitions = data;
+            });
+
+        // Charger les bonnes actions depuis le fichier JSON
+        fetch('bonnes_actions.json')
+            .then(response => response.json())
+            .then(data => {
+                bonnesActions = data;
+            });
+
+        // Fonction pour choisir une punition aléatoire
+        function choisirPunition() {
+            if (punitions.length === 0) {
+                document.getElementById("resultat").innerText = "Toutes les punitions ont été utilisées.";
+                document.getElementById("description").innerText = "";
+                return;
+            }
+            const index = Math.floor(Math.random() * punitions.length);
+            const punitionChoisie = punitions.splice(index, 1)[0]; // Retire la punition de la liste après sélection
+            document.getElementById("resultat").innerText = "Punition : " + punitionChoisie.nom;
+            document.getElementById("description").innerText = punitionChoisie.description;
+        }
+
+        // Fonction pour choisir une bonne action aléatoire
+        function choisirBonneAction() {
+            if (bonnesActions.length === 0) {
+                document.getElementById("resultat").innerText = "Toutes les bonnes actions ont été utilisées.";
+                document.getElementById("description").innerText = "";
+                return;
+            }
+            const index = Math.floor(Math.random() * bonnesActions.length);
+            const actionChoisie = bonnesActions.splice(index, 1)[0]; // Retire la bonne action de la liste après sélection
+            document.getElementById("resultat").innerText = "Bonne action : " + actionChoisie.nom;
+            document.getElementById("description").innerText = actionChoisie.description;
+        }
+    </script>
+</body>
+</html>
