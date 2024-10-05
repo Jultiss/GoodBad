@@ -40,6 +40,24 @@
         .fa {
             line-height: 60px;
         }
+        /* Styles pour l'animation du dé */
+        .dice {
+            width: 50px;
+            height: 50px;
+            background-color: #4CAF50;
+            margin: 20px auto;
+            display: none; /* Par défaut caché */
+            border-radius: 10px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 24px;
+            color: white;
+            animation: roll 1s infinite;
+        }
+        @keyframes roll {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -60,6 +78,8 @@
         <i class="fas fa-smile-beam"></i>
     </button>
     
+    <div class="dice" id="dice">🎲</div> <!-- Dé animé -->
+
     <p id="resultat">Cliquez sur un bouton pour faire un choix aléatoire</p>
     <p id="description"></p>
 
@@ -91,41 +111,57 @@
 
         // Fonction pour choisir une activité aléatoire
         function choisirActivite() {
-            if (activites.length === 0) {
-                document.getElementById("resultat").innerText = "Toutes les activités ont été utilisées.";
-                document.getElementById("description").innerText = "";
-                return;
-            }
-            const index = Math.floor(Math.random() * activites.length);
-            const activiteChoisie = activites.splice(index, 1)[0]; // Retire l'activité de la liste après sélection
-            document.getElementById("resultat").innerText = "Activité : " + activiteChoisie.nom;
-            document.getElementById("description").innerText = activiteChoisie.description + " - Adresse : " + activiteChoisie.adresse + " - Budget : " + activiteChoisie.budget;
+            lancerDes(function() {
+                if (activites.length === 0) {
+                    document.getElementById("resultat").innerText = "Toutes les activités ont été utilisées.";
+                    document.getElementById("description").innerText = "";
+                    return;
+                }
+                const index = Math.floor(Math.random() * activites.length);
+                const activiteChoisie = activites.splice(index, 1)[0]; // Retire l'activité de la liste après sélection
+                document.getElementById("resultat").innerText = "Activité : " + activiteChoisie.nom;
+                document.getElementById("description").innerText = activiteChoisie.description + " - Budget : " + activiteChoisie.budget;
+            });
         }
 
         // Fonction pour choisir une punition aléatoire
         function choisirPunition() {
-            if (punitions.length === 0) {
-                document.getElementById("resultat").innerText = "Toutes les punitions ont été utilisées.";
-                document.getElementById("description").innerText = "";
-                return;
-            }
-            const index = Math.floor(Math.random() * punitions.length);
-            const punitionChoisie = punitions.splice(index, 1)[0]; // Retire la punition de la liste après sélection
-            document.getElementById("resultat").innerText = "Punition : " + punitionChoisie.nom;
-            document.getElementById("description").innerText = punitionChoisie.description;
+            lancerDes(function() {
+                if (punitions.length === 0) {
+                    document.getElementById("resultat").innerText = "Toutes les punitions ont été utilisées.";
+                    document.getElementById("description").innerText = "";
+                    return;
+                }
+                const index = Math.floor(Math.random() * punitions.length);
+                const punitionChoisie = punitions.splice(index, 1)[0]; // Retire la punition de la liste après sélection
+                document.getElementById("resultat").innerText = "Punition : " + punitionChoisie.nom;
+                document.getElementById("description").innerText = punitionChoisie.description;
+            });
         }
 
         // Fonction pour choisir une bonne action aléatoire
         function choisirBonneAction() {
-            if (bonnesActions.length === 0) {
-                document.getElementById("resultat").innerText = "Toutes les bonnes actions ont été utilisées.";
-                document.getElementById("description").innerText = "";
-                return;
-            }
-            const index = Math.floor(Math.random() * bonnesActions.length);
-            const actionChoisie = bonnesActions.splice(index, 1)[0]; // Retire la bonne action de la liste après sélection
-            document.getElementById("resultat").innerText = "Bonne action : " + actionChoisie.nom;
-            document.getElementById("description").innerText = actionChoisie.description;
+            lancerDes(function() {
+                if (bonnesActions.length === 0) {
+                    document.getElementById("resultat").innerText = "Toutes les bonnes actions ont été utilisées.";
+                    document.getElementById("description").innerText = "";
+                    return;
+                }
+                const index = Math.floor(Math.random() * bonnesActions.length);
+                const actionChoisie = bonnesActions.splice(index, 1)[0]; // Retire la bonne action de la liste après sélection
+                document.getElementById("resultat").innerText = "Bonne action : " + actionChoisie.nom;
+                document.getElementById("description").innerText = actionChoisie.description;
+            });
+        }
+
+        // Fonction pour lancer les dés avant de montrer le résultat
+        function lancerDes(callback) {
+            const dice = document.getElementById("dice");
+            dice.style.display = "block"; // Montrer le dé qui tourne
+            setTimeout(function() {
+                dice.style.display = "none"; // Cacher le dé après 2 secondes
+                callback(); // Exécuter la fonction qui affiche le résultat
+            }, 2000); // Attendre 2 secondes avant d'afficher le résultat
         }
     </script>
 </body>
