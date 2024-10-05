@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choix aléatoire pour enfants</title>
+    <!-- Intégrer Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,7 +17,7 @@
         }
         #punitionButton, #bonneActionButton {
             padding: 20px;
-            font-size: 24px;
+            font-size: 40px;
             cursor: pointer;
             background-color: #f44336;
             color: white;
@@ -32,12 +34,21 @@
             font-size: 18px;
             margin-top: 20px;
         }
+        .fa {
+            line-height: 60px;
+        }
     </style>
 </head>
 <body>
     <h1>Choix aléatoire pour enfants</h1>
-    <button id="punitionButton" onclick="choisirPunition()">Punition</button>
-    <button id="bonneActionButton" onclick="choisirBonneAction()">Bonne action</button>
+    <!-- Bouton avec l'icône du diable pour la punition -->
+    <button id="punitionButton" onclick="choisirPunition()">
+        <i class="fas fa-smile-beam"></i>
+    </button>
+    <!-- Bouton avec l'icône de l'ange pour la bonne action -->
+    <button id="bonneActionButton" onclick="choisirBonneAction()">
+        <i class="fas fa-angry"></i>
+    </button>
     <p id="resultat">Cliquez sur un bouton pour choisir une punition ou une bonne action</p>
     <p id="description"></p>
 
