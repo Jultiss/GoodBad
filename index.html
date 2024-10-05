@@ -9,53 +9,68 @@
     <!-- Ajouter Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            text-align: center;
-            margin-top: 50px;
-            background-image: 142C22F2-5098-4618-B366-5391253741A5.webp ; /* Image de fond */
-            background-size: cover;
-            background-position: center;
-            color: white;
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+                url('142C22F2-5098-4618-B366-5391253741A5.webp'); /* Image de fond en filigrane */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+}
+        /* H1 */
         h1 {
+            font-size: 5vw; /* Ajustement dynamique */
             color: #4CAF50;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            margin-top: 30px;
         }
+
+        /* Boutons de sélection */
         #activityButton, #punitionButton, #bonneActionButton {
             padding: 20px;
-            font-size: 40px;
+            font-size: 5vw; /* Ajustement dynamique */
             cursor: pointer;
             background-color: rgba(255, 255, 255, 0.8);
             color: white;
             border: none;
             border-radius: 50%;
-            width: 120px;
-            height: 120px;
+            width: 20vw; /* Ajustement dynamique */
+            height: 20vw; /* Ajustement dynamique */
             margin: 10px;
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
             transition: transform 0.2s;
         }
+
         #activityButton:hover, #punitionButton:hover, #bonneActionButton:hover {
             transform: scale(1.1);
         }
+
         #activityButton {
             background-color: #FFB74D;
         }
+
         #punitionButton {
             background-color: #E57373;
         }
+
         #bonneActionButton {
             background-color: #81C784;
         }
+
         p {
             font-size: 18px;
             margin-top: 20px;
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
         }
+
         .fa {
             line-height: 60px;
         }
+
         /* Styles du dé 3D */
         .dice-3d {
             width: 100px;
@@ -81,12 +96,12 @@
             color: black;
         }
 
-        .face1  { transform: rotateY(0deg) translateZ(50px); }
-        .face2  { transform: rotateY(90deg) translateZ(50px); }
-        .face3  { transform: rotateY(180deg) translateZ(50px); }
-        .face4  { transform: rotateY(-90deg) translateZ(50px); }
-        .face5  { transform: rotateX(90deg) translateZ(50px); }
-        .face6  { transform: rotateX(-90deg) translateZ(50px); }
+        .face1 { transform: rotateY(0deg) translateZ(50px); }
+        .face2 { transform: rotateY(90deg) translateZ(50px); }
+        .face3 { transform: rotateY(180deg) translateZ(50px); }
+        .face4 { transform: rotateY(-90deg) translateZ(50px); }
+        .face5 { transform: rotateX(90deg) translateZ(50px); }
+        .face6 { transform: rotateX(-90deg) translateZ(50px); }
 
         /* Animation de rotation sur plusieurs axes */
         @keyframes spin {
@@ -96,7 +111,7 @@
 
         /* Résultat stylisé */
         #resultat {
-            font-size: 28px;
+            font-size: 5vw; /* Ajustement dynamique */
             font-weight: bold;
             margin-top: 30px;
             padding: 10px;
@@ -104,18 +119,74 @@
             display: inline-block;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
         }
+
         .result-activite {
             color: #FFB74D;
         }
+
         .result-punition {
             color: #E57373;
         }
+
         .result-bonne-action {
             color: #81C784;
         }
+
         #description {
-            font-size: 20px;
+            font-size: 3vw; /* Ajustement dynamique */
             margin-top: 10px;
+        }
+
+        /* Media Queries */
+        @media only screen and (max-width: 768px) { /* Tablettes */
+            #activityButton, #punitionButton, #bonneActionButton {
+                width: 30vw; /* Taille plus petite */
+                height: 30vw;
+                font-size: 6vw; /* Police adaptée pour tablette */
+            }
+
+            h1 {
+                font-size: 8vw; /* Titre plus petit sur tablette */
+            }
+
+            #resultat {
+                font-size: 7vw; /* Ajustement dynamique pour tablette */
+            }
+
+            #description {
+                font-size: 4vw; /* Description plus petite sur tablette */
+            }
+        }
+
+        @media only screen and (max-width: 480px) { /* iPhone et petits appareils */
+            #activityButton, #punitionButton, #bonneActionButton {
+                width: 40vw; /* Taille ajustée pour petits écrans */
+                height: 40vw;
+                font-size: 8vw; /* Police plus grande sur mobile */
+            }
+
+            h1 {
+                font-size: 10vw; /* Titre plus grand sur mobile */
+            }
+
+            .dice-3d {
+                width: 80px;
+                height: 80px;
+            }
+
+            .dice-3d div {
+                width: 80px;
+                height: 80px;
+                font-size: 24px; /* Ajustement de la taille de la police du dé */
+            }
+
+            #resultat {
+                font-size: 9vw; /* Résultat visible sur mobile */
+            }
+
+            #description {
+                font-size: 5vw; /* Description adaptée pour mobile */
+            }
         }
     </style>
 </head>
@@ -186,7 +257,7 @@
                 }
                 const index = Math.floor(Math.random() * activites.length);
                 const activiteChoisie = activites.splice(index, 1)[0];
-                document.getElementById("resultat").innerText = "Activité : " + activiteChoisie.nom;
+                document.getElementById("resultat").innerText =  activiteChoisie.nom;
                 document.getElementById("resultat").className = "result-activite";
                 document.getElementById("description").innerText = activiteChoisie.description + " - Budget : " + activiteChoisie.budget;
             });
@@ -202,7 +273,7 @@
                 }
                 const index = Math.floor(Math.random() * punitions.length);
                 const punitionChoisie = punitions.splice(index, 1)[0];
-                document.getElementById("resultat").innerText = "Punition : " + punitionChoisie.nom;
+                document.getElementById("resultat").innerText = punitionChoisie.nom;
                 document.getElementById("resultat").className = "result-punition";
                 document.getElementById("description").innerText = punitionChoisie.description;
             });
@@ -218,7 +289,7 @@
                 }
                 const index = Math.floor(Math.random() * bonnesActions.length);
                 const actionChoisie = bonnesActions.splice(index, 1)[0];
-                document.getElementById("resultat").innerText = "Bonne action : " + actionChoisie.nom;
+                document.getElementById("resultat").innerText = actionChoisie.nom;
                 document.getElementById("resultat").className = "result-bonne-action";
                 document.getElementById("description").innerText = actionChoisie.description;
             });
