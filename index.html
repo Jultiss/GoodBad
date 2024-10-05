@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choix aléatoire pour enfants</title>
-    <!-- Intégrer Font Awesome -->
+    <title>Choix Aléatoire - Activités & Enfants</title>
+    <!-- Intégrer Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -15,17 +15,20 @@
         h1 {
             color: #4CAF50;
         }
-        #punitionButton, #bonneActionButton {
+        #activityButton, #punitionButton, #bonneActionButton {
             padding: 20px;
-            font-size: 40px;
+            font-size: 24px;
             cursor: pointer;
-            background-color: #f44336;
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 50%;
             width: 100px;
             height: 100px;
             margin: 10px;
+        }
+        #punitionButton {
+            background-color: #f44336;
         }
         #bonneActionButton {
             background-color: #4CAF50;
@@ -40,21 +43,37 @@
     </style>
 </head>
 <body>
-    <h1>Choix aléatoire pour enfants</h1>
-    <!-- Bouton avec l'icône du diable pour la punition -->
-    <button id="punitionButton" onclick="choisirPunition()">
-        <i class="fas fa-smile-beam"></i>
+    <h1>Choix Aléatoire - Activités & Enfants</h1>
+    
+    <!-- Bouton pour choisir une activité -->
+    <button id="activityButton" onclick="choisirActivite()">
+        <i class="fas fa-random"></i>
     </button>
-    <!-- Bouton avec l'icône de l'ange pour la bonne action -->
-    <button id="bonneActionButton" onclick="choisirBonneAction()">
+    
+    <!-- Bouton pour choisir une punition avec une icône diable -->
+    <button id="punitionButton" onclick="choisirPunition()">
         <i class="fas fa-angry"></i>
     </button>
-    <p id="resultat">Cliquez sur un bouton pour choisir une punition ou une bonne action</p>
+    
+    <!-- Bouton pour choisir une bonne action avec une icône ange -->
+    <button id="bonneActionButton" onclick="choisirBonneAction()">
+        <i class="fas fa-smile-beam"></i>
+    </button>
+    
+    <p id="resultat">Cliquez sur un bouton pour faire un choix aléatoire</p>
     <p id="description"></p>
 
     <script>
+        let activites = [];
         let punitions = [];
         let bonnesActions = [];
+
+        // Charger les activités depuis le fichier JSON
+        fetch('activites.json')
+            .then(response => response.json())
+            .then(data => {
+                activites = data;
+            });
 
         // Charger les punitions depuis le fichier JSON
         fetch('punitions.json')
@@ -69,6 +88,19 @@
             .then(data => {
                 bonnesActions = data;
             });
+
+        // Fonction pour choisir une activité aléatoire
+        function choisirActivite() {
+            if (activites.length === 0) {
+                document.getElementById("resultat").innerText = "Toutes les activités ont été utilisées.";
+                document.getElementById("description").innerText = "";
+                return;
+            }
+            const index = Math.floor(Math.random() * activites.length);
+            const activiteChoisie = activites.splice(index, 1)[0]; // Retire l'activité de la liste après sélection
+            document.getElementById("resultat").innerText = "Activité : " + activiteChoisie.nom;
+            document.getElementById("description").innerText = activiteChoisie.description + " - Adresse : " + activiteChoisie.adresse + " - Budget : " + activiteChoisie.budget;
+        }
 
         // Fonction pour choisir une punition aléatoire
         function choisirPunition() {
