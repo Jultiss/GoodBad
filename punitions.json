@@ -1,0 +1,12 @@
+[
+    {"nom": "Privation de dessin animé", "description": "Pas de dessin animé pendant une journée"},
+    {"nom": "Privation de dessert", "description": "Pas de dessert ce soir"},
+    {"nom": "Faire 10 minutes de rangement", "description": "Ranger la chambre ou un espace commun pendant 10 minutes"},
+    {"nom": "Pas de tablette ou jeux vidéo", "description": "Pas de tablette ou jeux vidéo pendant une journée"},
+    {"nom": "Faire les devoirs supplémentaires", "description": "Faire des exercices supplémentaires après les devoirs"},
+    {"nom": "Pas de sortie avec les amis", "description": "Pas de sortie avec les amis ce week-end"},
+    {"nom": "Réfléchir pendant 10 minutes", "description": "Prendre un moment pour réfléchir au comportement pendant 10 minutes"},
+    {"nom": "Balayer la cuisine", "description": "Balayer la cuisine après le repas"},
+    {"nom": "Faire le lit des parents", "description": "Faire le lit de papa et maman le matin"},
+    {"nom": "Pas de sucreries", "description": "Pas de bonbons ni de sucreries pendant 2 jours"}
+]
