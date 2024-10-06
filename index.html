@@ -10,18 +10,19 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap">
     <link rel="apple-touch-icon" href="icone.png">
     <style>
-body {
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
                 url('142C22F2-5098-4618-B366-5391253741A5.webp'); /* Image de fond en filigrane */
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    color: white;
-}
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
         /* H1 */
         h1 {
             font-size: 5vw; /* Ajustement dynamique */
@@ -72,42 +73,12 @@ body {
             line-height: 60px;
         }
 
-        /* Styles du dé 3D */
-        .dice-3d {
-            width: 100px;
-            height: 100px;
-            position: relative;
+        /* Style du GIF */
+        #dice-gif {
+            width: 200px; /* Ajuster la taille si nécessaire */
+            height: auto;
             margin: 20px auto;
-            transform-style: preserve-3d;
-            transform: rotateX(0deg) rotateY(0deg);
-            animation: spin 2s infinite;
-            display: none; /* Par défaut, caché */
-        }
-
-        .dice-3d div {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ccc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 30px;
-            color: black;
-        }
-
-        .face1 { transform: rotateY(0deg) translateZ(50px); }
-        .face2 { transform: rotateY(90deg) translateZ(50px); }
-        .face3 { transform: rotateY(180deg) translateZ(50px); }
-        .face4 { transform: rotateY(-90deg) translateZ(50px); }
-        .face5 { transform: rotateX(90deg) translateZ(50px); }
-        .face6 { transform: rotateX(-90deg) translateZ(50px); }
-
-        /* Animation de rotation sur plusieurs axes */
-        @keyframes spin {
-            0% { transform: rotateX(0deg) rotateY(0deg); }
-            100% { transform: rotateX(360deg) rotateY(360deg); }
+            display: none; /* Le GIF est caché au départ */
         }
 
         /* Résultat stylisé */
@@ -170,15 +141,8 @@ body {
                 font-size: 10vw; /* Titre plus grand sur mobile */
             }
 
-            .dice-3d {
-                width: 80px;
-                height: 80px;
-            }
-
-            .dice-3d div {
-                width: 80px;
-                height: 80px;
-                font-size: 24px; /* Ajustement de la taille de la police du dé */
+            #dice-gif {
+                width: 150px;
             }
 
             #resultat {
@@ -209,15 +173,8 @@ body {
         <i class="fas fa-hands-helping"></i>
     </button>
     
-    <!-- Dé 3D -->
-    <div class="dice-3d" id="dice">
-        <div class="face1">1</div>
-        <div class="face2">2</div>
-        <div class="face3">3</div>
-        <div class="face4">4</div>
-        <div class="face5">5</div>
-        <div class="face6">6</div>
-    </div>
+    <!-- GIF à la place du dé tournant -->
+    <img id="dice-gif" src="Animation - 1728194557033.gif" alt="Animation en cours">
 
     <p id="resultat">Cliquez sur un bouton pour faire un choix aléatoire</p>
     <p id="description"></p>
@@ -250,7 +207,7 @@ body {
 
         // Fonction pour choisir une activité aléatoire
         function choisirActivite() {
-            lancerDes(function() {
+            lancerGif(function() {
                 if (activites.length === 0) {
                     document.getElementById("resultat").innerText = "Toutes les activités ont été utilisées.";
                     document.getElementById("description").innerText = "";
@@ -258,7 +215,7 @@ body {
                 }
                 const index = Math.floor(Math.random() * activites.length);
                 const activiteChoisie = activites.splice(index, 1)[0];
-                document.getElementById("resultat").innerText =  activiteChoisie.nom;
+                document.getElementById("resultat").innerText = activiteChoisie.nom;
                 document.getElementById("resultat").className = "result-activite";
                 document.getElementById("description").innerText = activiteChoisie.description + " - Budget : " + activiteChoisie.budget;
             });
@@ -266,7 +223,7 @@ body {
 
         // Fonction pour choisir une punition aléatoire
         function choisirPunition() {
-            lancerDes(function() {
+            lancerGif(function() {
                 if (punitions.length === 0) {
                     document.getElementById("resultat").innerText = "Toutes les punitions ont été utilisées.";
                     document.getElementById("description").innerText = "";
@@ -282,7 +239,7 @@ body {
 
         // Fonction pour choisir une bonne action aléatoire
         function choisirBonneAction() {
-            lancerDes(function() {
+            lancerGif(function() {
                 if (bonnesActions.length === 0) {
                     document.getElementById("resultat").innerText = "Toutes les bonnes actions ont été utilisées.";
                     document.getElementById("description").innerText = "";
@@ -296,12 +253,12 @@ body {
             });
         }
 
-        // Fonction pour lancer les dés avant de montrer le résultat
-        function lancerDes(callback) {
-            const dice = document.getElementById("dice");
-            dice.style.display = "block"; // Montrer le dé qui tourne
+        // Fonction pour lancer l'animation GIF avant de montrer le résultat
+        function lancerGif(callback) {
+            const gif = document.getElementById("dice-gif");
+            gif.style.display = "block"; // Montrer le GIF
             setTimeout(function() {
-                dice.style.display = "none"; // Cacher le dé après 2 secondes
+                gif.style.display = "none"; // Cacher le GIF après 2 secondes
                 callback(); // Exécuter la fonction qui affiche le résultat
             }, 2000); // Attendre 2 secondes avant d'afficher le résultat
         }
