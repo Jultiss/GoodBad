@@ -73,12 +73,27 @@
             line-height: 60px;
         }
 
-        /* Style du GIF */
+        /* Overlay pour le GIF */
+        #overlay {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Arrière-plan en filigrane */
+            z-index: 10;
+        }
+
+        /* Centrer le GIF */
         #dice-gif {
-            width: 200px; /* Ajuster la taille si nécessaire */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 20; /* Au-dessus de l'overlay */
+            width: 200px; /* Ajustez la taille si nécessaire */
             height: auto;
-            margin: 20px auto;
-            display: none; /* Le GIF est caché au départ */
         }
 
         /* Résultat stylisé */
@@ -173,8 +188,10 @@
         <i class="fas fa-hands-helping"></i>
     </button>
     
-    <!-- GIF à la place du dé tournant -->
-    <img id="dice-gif" src="Animation - 1728194557033.gif" alt="Animation en cours">
+    <!-- Overlay et GIF -->
+    <div id="overlay">
+        <img id="dice-gif" src="Animation - 1728194557033.gif" alt="Animation en cours">
+    </div>
 
     <p id="resultat">Cliquez sur un bouton pour faire un choix aléatoire</p>
     <p id="description"></p>
@@ -255,10 +272,10 @@
 
         // Fonction pour lancer l'animation GIF avant de montrer le résultat
         function lancerGif(callback) {
-            const gif = document.getElementById("dice-gif");
-            gif.style.display = "block"; // Montrer le GIF
+            const overlay = document.getElementById("overlay");
+            overlay.style.display = "block"; // Montrer l'overlay et le GIF
             setTimeout(function() {
-                gif.style.display = "none"; // Cacher le GIF après 2 secondes
+                overlay.style.display = "none"; // Cacher l'overlay et le GIF après 2 secondes
                 callback(); // Exécuter la fonction qui affiche le résultat
             }, 2000); // Attendre 2 secondes avant d'afficher le résultat
         }
