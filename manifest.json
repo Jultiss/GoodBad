@@ -1,0 +1,21 @@
+{
+    "name": "KidsXpérience",
+    "short_name": "KidsXpérience",
+    "description": "L’application est conçue pour aider les enfants de 8 à 13 ans à équilibrer leurs activités quotidiennes tout en s’amusant et en apprenant la responsabilité. Avec un système ludique de bonnes actions, d’activités et de punitions adaptées, l’application motive les enfants à s’engager dans des comportements positifs tout en acceptant les conséquences des moins bonnes actions.",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#4CAF50",
+    "icons": [
+      {
+        "src": "/images/icone",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/images/icone",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
