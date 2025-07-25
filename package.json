@@ -1,0 +1,8 @@
+{
+  "name": "kidsxperience",
+  "version": "1.0.0",
+  "description": "Validation tests for KidsXpérience data",
+  "scripts": {
+    "test": "node test/validate-json.js"
+  }
+}
